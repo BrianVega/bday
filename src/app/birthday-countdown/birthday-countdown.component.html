@@ -1,35 +1,22 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Birthday</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-    <div class="clock-container">
-        <h1>Cuenta Regresiva...</h1>
-        <div class="clock-numbers">
-            <div class="clock-days countdown-container">
-                <div class="remaining-days number-container" >{{remainingDays()}}</div>
-                <span class="caption">Days</span>
-            </div>
-            <div class="clock-hours countdown-container">
-                <div class="remaining-hours number-container">{{remainingHours()}}</div>
-                <span class="caption">Hours</span>
-            </div>
-            <div class="clock-minutes countdown-container">
-                <div class="remaining-minutes number-container">{{remainingMinutes()}}</div>
-                <span class="caption">Minutes</span>
-            </div>
-            <div class="clock-seconds countdown-container">
-                <div class="remaining-seconds number-container">{{remainingSeconds()}}</div>
-                <span class="caption">Seconds</span>
-            </div>
-            <span>{{name()}}</span>
-        </div>
+<div class="clock-container">
+  <h1>Cuenta Regresiva...</h1>
+  <div class="clock-numbers">
+    <div class="clock-days countdown-container">
+      <div class="remaining-days number-container">{{ remainingDays() }}</div>
+      <span class="caption">Days</span>
     </div>
-
-</body>
-</html>
+    <div class="clock-hours countdown-container">
+      <div class="remaining-hours number-container">{{ remainingHours() }}</div>
+      <span class="caption">Hours</span>
+    </div>
+    <div class="clock-minutes countdown-container">
+      <div class="remaining-minutes number-container">{{ remainingMinutes() }}</div>
+      <span class="caption">Minutes</span>
+    </div>
+    <div class="clock-seconds countdown-container">
+      <div class="remaining-seconds number-container">{{ remainingSeconds() }}</div>
+      <span class="caption">Seconds</span>
+    </div>
+    <span>{{ name() }}</span>
+  </div>
+</div>
