@@ -81,6 +81,16 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
 
   private recomputeRemaining(): void {
     const msLeft = Math.max(0, this.targetMs - Date.now());
+    if (msLeft === 0) {
+      this.remainingDays.set(0);
+      this.remainingHours.set(0);
+      this.remainingMinutes.set(0);
+      this.remainingSeconds.set(0);
+
+      this.clearTimer();
+      return;
+    }
+
     let total = Math.floor(msLeft / 1000);
 
     const days = Math.floor(total / 86400);
@@ -96,11 +106,17 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
     this.remainingMinutes.set(minutes);
     this.remainingSeconds.set(seconds);
 
+
   }
 
   ngOnDestroy(): void {
+    this.clearTimer();
+  }
+
+  clearTimer (): void {
     if (this.timerId) {
       clearInterval(this.timerId);
+      this.timerId = undefined;
     }
   }
 
