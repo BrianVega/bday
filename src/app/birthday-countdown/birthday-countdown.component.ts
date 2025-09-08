@@ -49,7 +49,7 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
       throw new InvalidDateError(`Invalid month number, ${startingMonth} is not in the range 1 - 12`);
     }
 
-    const testDayInput: Date = new Date(new Date().getFullYear(), startingMonth - 1, 0);
+    const testDayInput: Date = new Date(new Date().getFullYear(), startingMonth, 0);
     const numberOfDaysOfMonth: number = testDayInput.getDate();
     console.log(numberOfDaysOfMonth);
 
