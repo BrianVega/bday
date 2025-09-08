@@ -1,4 +1,4 @@
-import {Component, signal, OnInit, WritableSignal, OnDestroy} from '@angular/core';
+import {Component, signal, OnInit, WritableSignal, OnDestroy, Signal, computed} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { InvalidDateError } from '../../exceptions/InvalidDateError';
 
@@ -20,6 +20,10 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
   remainingMinutes: WritableSignal<number> = signal(0);
   remainingSeconds: WritableSignal<number> = signal(0);
   name: WritableSignal<string> = signal("Bebé");
+  isBirthday: Signal<boolean> = computed(() => {
+    return this.remainingDays() === 0 && this.remainingHours() === 0
+    && this.remainingMinutes() === 0 && this.remainingSeconds() === 0;
+  });
 
   private timerId?: number;
   private targetMs: number = 0;
@@ -81,6 +85,8 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
 
   private recomputeRemaining(): void {
     const msLeft = Math.max(0, this.targetMs - Date.now());
+
+    // if (msLeft === 0 || (this.remainingMinutes() != 0 && this.remainingMinutes() < 27)) { // Dummy check to see if ngIf works. Do not asses this please
     if (msLeft === 0) {
       this.remainingDays.set(0);
       this.remainingHours.set(0);
@@ -120,4 +126,7 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
     }
   }
 
+  transformToTwoDigits(signalNumber: number): string {
+    return signalNumber.toString().padStart(2, '0');
+  }
 }

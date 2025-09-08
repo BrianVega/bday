@@ -1,22 +1,25 @@
 <div class="clock-container">
-  <h1>Cuenta Regresiva...</h1>
-  <div class="clock-numbers">
-    <div class="clock-days countdown-container">
-      <div class="remaining-days number-container">{{ remainingDays() }}</div>
-      <span class="caption">Days</span>
+  <h1 class="main-header">Cuenta Regresiva...</h1>
+  @if (!isBirthday()) {
+    <div class="clock-numbers">
+      <div class="clock-days countdown-container">
+        <div class="remaining-days number-container">{{ transformToTwoDigits(remainingDays()) }}</div>
+        <span class="caption">Days</span>
+      </div>
+      <div class="clock-hours countdown-container">
+        <div class="remaining-hours number-container">{{ transformToTwoDigits(remainingHours()) }}</div>
+        <span class="caption">Hours</span>
+      </div>
+      <div class="clock-minutes countdown-container">
+        <div class="remaining-minutes number-container">{{ transformToTwoDigits(remainingMinutes()) }}</div>
+        <span class="caption">Minutes</span>
+      </div>
+      <div class="clock-seconds countdown-container">
+        <div class="remaining-seconds number-container">{{ transformToTwoDigits(remainingSeconds()) }}</div>
+        <span class="caption">Seconds</span>
+      </div>
     </div>
-    <div class="clock-hours countdown-container">
-      <div class="remaining-hours number-container">{{ remainingHours() }}</div>
-      <span class="caption">Hours</span>
-    </div>
-    <div class="clock-minutes countdown-container">
-      <div class="remaining-minutes number-container">{{ remainingMinutes() }}</div>
-      <span class="caption">Minutes</span>
-    </div>
-    <div class="clock-seconds countdown-container">
-      <div class="remaining-seconds number-container">{{ remainingSeconds() }}</div>
-      <span class="caption">Seconds</span>
-    </div>
-    <span>{{ name() }}</span>
-  </div>
+  } @else {
+    <h1>Is your birthday! {{ name() }}</h1>
+  }
 </div>
