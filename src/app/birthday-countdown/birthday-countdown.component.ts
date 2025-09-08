@@ -54,7 +54,7 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
     console.log(numberOfDaysOfMonth);
 
     if (startingDay < 1 || numberOfDaysOfMonth < startingDay) {
-      throw new InvalidDateError(`Day ${startingDay} is not in the days range of the ${startingMonth - 1} number month`);
+      throw new InvalidDateError(`Day ${startingDay} is not in the days range of the ${startingMonth} number month`);
     }
 
     return {startingMonth, startingDay};
