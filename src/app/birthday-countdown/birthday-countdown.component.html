@@ -1,6 +1,6 @@
 <div class="clock-container">
-  <h1 class="main-header">Cuenta Regresiva...</h1>
   @if (!isBirthday()) {
+  <h1 class="main-header">Cuenta Regresiva...</h1>
     <div class="clock-numbers">
       <div class="clock-days countdown-container">
         <div class="remaining-days number-container">{{ transformToTwoDigits(remainingDays()) }}</div>
@@ -20,6 +20,6 @@
       </div>
     </div>
   } @else {
-    <h1>Is your birthday! {{ name() }}</h1>
+    <h1 class="congrats-message">Is your birthday! {{ name() }}</h1>
   }
 </div>
