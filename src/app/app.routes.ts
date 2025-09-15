@@ -9,4 +9,8 @@ export const routes: Routes = [
       path: 'happy-birthday',
       loadComponent: () => import('./birthday-landing-page/birthday-landing-page.component').then(c => c.BirthdayLandingPageComponent)
     },
+    {
+      path: '**',
+      loadComponent: () => import('./not-found/not-found.component').then(m => m.NotFoundComponent)
+    }
 ];
