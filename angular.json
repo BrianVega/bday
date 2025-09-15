@@ -55,7 +55,9 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/brianvega/",
+              "deployUrl": "/brianvega/"
             },
             "development": {
               "optimization": false,
