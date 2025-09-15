@@ -1,10 +1,10 @@
-import {Component, signal, OnInit, WritableSignal, OnDestroy, Signal, computed} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, signal, OnInit, WritableSignal, OnDestroy, Signal, computed, effect} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import { InvalidDateError } from '../../exceptions/InvalidDateError';
 
 export interface BirthdayParams {
-  startingMonth: number;
-  startingDay: number;
+  targetMonth: number;
+  targetDay: number;
 }
 
 @Component({
@@ -21,18 +21,35 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
   remainingSeconds: WritableSignal<number> = signal(0);
   name: WritableSignal<string> = signal("Bebé");
   isBirthday: Signal<boolean> = computed(() => {
-    return this.remainingDays() === 0 && this.remainingHours() === 0
-    && this.remainingMinutes() === 0 && this.remainingSeconds() === 0;
+    const today = new Date();
+
+    return (this.remainingDays() === 0 && this.remainingHours() === 0
+    && this.remainingMinutes() === 0 && this.remainingSeconds() === 0)
+    ||  (this.targetMonth == today.getMonth() + 1 && this.targetDay == today.getDate());
   });
 
   private timerId?: number;
   private targetMs: number = 0;
 
+  private targetDay!: number;
+  private targetMonth!: number;
+
   private activatedRoute: ActivatedRoute;
 
-  constructor(activatedRoute: ActivatedRoute) {
+  constructor(activatedRoute: ActivatedRoute, private router: Router) {
     this.activatedRoute = activatedRoute;
     console.log("Birthday Component Created")
+
+    effect((onCleanup) => {
+      if (this.isBirthday()) {
+        console.log("Effect")
+        const timer = setTimeout(() => {
+          this.router.navigate(['/happy-birthday']);
+        }, 300000); // 300000 -> 5mins // 10000 -> 10secs
+
+        onCleanup(() => clearTimeout(timer));
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -44,31 +61,31 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
   }
 
 
-  private getParams(): BirthdayParams {
-    const startingDay = +this.activatedRoute.snapshot.paramMap.get('day')!;
-    const startingMonth = +this.activatedRoute.snapshot.paramMap.get('month')!;
+  private getParams() {
+    this.targetDay = +this.activatedRoute.snapshot.paramMap.get('day')!;
+    this.targetMonth = +this.activatedRoute.snapshot.paramMap.get('month')!;
     this.name.set(this.activatedRoute.snapshot.paramMap.get('name') ?? this.name());
 
-    if (startingMonth < 1 || startingMonth > 12) {
-      throw new InvalidDateError(`Invalid month number, ${startingMonth} is not in the range 1 - 12`);
+    if (this.targetMonth < 1 || this.targetMonth > 12) {
+      throw new InvalidDateError(`Invalid month number, ${this.targetMonth} is not in the range 1 - 12`);
     }
 
-    const testDayInput: Date = new Date(new Date().getFullYear(), startingMonth, 0);
+    const testDayInput: Date = new Date(new Date().getFullYear(), this.targetMonth, 0);
     const numberOfDaysOfMonth: number = testDayInput.getDate();
     console.log(numberOfDaysOfMonth);
 
-    if (startingDay < 1 || numberOfDaysOfMonth < startingDay) {
-      throw new InvalidDateError(`Day ${startingDay} is not in the days range of the ${startingMonth} number month`);
+    if (this.targetDay < 1 || numberOfDaysOfMonth < this.targetDay) {
+      throw new InvalidDateError(`Day ${this.targetDay} is not in the days range of the ${this.targetMonth} number month`);
     }
 
-    return {startingMonth, startingDay};
   }
 
   private setTargetFromParams() {
-    let birthdayParams: BirthdayParams = this.getParams();
+    this.getParams();
+    let birthdayParams: BirthdayParams = {targetMonth: this.targetMonth, targetDay: this.targetDay};
 
     const currentDate: Date = new Date();
-    const targetDate: Date = new Date(currentDate.getFullYear(), birthdayParams['startingMonth'] - 1, birthdayParams['startingDay']);
+    const targetDate: Date = new Date(currentDate.getFullYear(), birthdayParams['targetMonth'] - 1, birthdayParams['targetDay']);
 
     if (targetDate.getTime() <= currentDate.getTime()) {
       targetDate.setFullYear(currentDate.getFullYear() + 1);
