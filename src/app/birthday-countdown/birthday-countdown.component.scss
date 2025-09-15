@@ -16,11 +16,11 @@
 }
 
 .clock-container {
-  height: 80vh;
+  min-height: 100vh;
+  min-width: 100vw;
   display: grid;
   place-items: center;
   align-content: center;
-  padding: 2rem;
   background: linear-gradient(135deg, #ffeef8, #f8f9ff);
   position: relative;
   overflow: hidden;
@@ -252,7 +252,6 @@
 @media (max-width: 992px) {
   .clock-container {
     height: auto;
-    min-height: 75vh;
     padding: 2rem 1.5rem;
   }
 
@@ -274,7 +273,6 @@
 @media (max-width: 768px) {
   .clock-container {
     height: auto;
-    min-height: 70vh;
     padding: 1.5rem 1rem;
   }
 
@@ -309,7 +307,6 @@
 @media (max-width: 576px) {
   .clock-container {
     padding: 1rem 0.8rem;
-    min-height: 65vh;
   }
 
   .main-header {
@@ -341,7 +338,6 @@
 @media (max-width: 480px) {
   .clock-container {
     padding: 1rem 0.5rem;
-    min-height: 60vh;
   }
 
   .main-header {
@@ -378,7 +374,6 @@
 @media (max-width: 380px) {
   .clock-container {
     padding: 0.8rem 0.3rem;
-    min-height: 55vh;
   }
 
   .main-header {
@@ -410,7 +405,6 @@
 @media (max-height: 600px) and (orientation: landscape) {
   .clock-container {
     height: auto;
-    min-height: 90vh;
     padding: 1rem;
   }
 

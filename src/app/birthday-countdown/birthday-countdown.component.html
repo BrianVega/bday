@@ -4,22 +4,23 @@
     <div class="clock-numbers">
       <div class="clock-days countdown-container">
         <div class="remaining-days number-container">{{ transformToTwoDigits(remainingDays()) }}</div>
-        <span class="caption">Days</span>
+        <span class="caption">Días</span>
       </div>
       <div class="clock-hours countdown-container">
         <div class="remaining-hours number-container">{{ transformToTwoDigits(remainingHours()) }}</div>
-        <span class="caption">Hours</span>
+        <span class="caption">Horas</span>
       </div>
       <div class="clock-minutes countdown-container">
         <div class="remaining-minutes number-container">{{ transformToTwoDigits(remainingMinutes()) }}</div>
-        <span class="caption">Minutes</span>
+        <span class="caption">Minutos</span>
       </div>
       <div class="clock-seconds countdown-container">
         <div class="remaining-seconds number-container">{{ transformToTwoDigits(remainingSeconds()) }}</div>
-        <span class="caption">Seconds</span>
+        <span class="caption">Segundos</span>
       </div>
     </div>
   } @else {
-    <h1 class="congrats-message">Is your birthday! {{ name() }}</h1>
+    <h1 class="congrats-message">Feliz Cumpleaños! {{ name() }} </h1>
+    <span class="plain-text">Ahora hay que esperar 5 minutos jeje</span>
   }
 </div>
