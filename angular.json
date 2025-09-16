@@ -55,8 +55,8 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/brianvega/",
-              "deployUrl": "/brianvega/"
+              "baseHref": "/bday/",
+              "deployUrl": "/bday/"
             },
             "development": {
               "optimization": false,
