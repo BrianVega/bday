@@ -32,15 +32,15 @@ jobs:
         run: npm ci
 
       - name: Build Angular App
-        run: npm run build -- --configuration production --base-href=/brianvega/ --output-path=dist
+        run: npm run build -- --configuration production --base-href=/bday/ --output-path=dist
 
       - name: Copy index.html to 404.html (for SPA routing)
-        run: cp dist/index.html dist/404.html
+        run: cp dist/browser/index.csr.html dist/browser/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./dist/browser
 
   # Deploy job
   deploy:
@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
