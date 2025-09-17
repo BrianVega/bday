@@ -42,12 +42,7 @@ export class BirthdayCountdownComponent implements OnInit, OnDestroy {
 
     effect((onCleanup) => {
       if (this.isBirthday()) {
-        console.log("Effect")
-        const timer = setTimeout(() => {
           this.router.navigate(['/happy-birthday']);
-        }, 300000); // 300000 -> 5mins // 10000 -> 10secs
-
-        onCleanup(() => clearTimeout(timer));
       }
     });
   }
