@@ -1,32 +1,55 @@
-import {Component, OnInit, AfterViewInit, ElementRef, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ElementRef, ViewChild, ViewEncapsulation, OnDestroy} from '@angular/core';
+import {PhotoService} from '../../services/photo.service';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {PhotoInterface} from '../interfaces/PhotoInterface';
 
 @Component({
   selector: 'app-birthday-landing-page',
   templateUrl: './birthday-landing-page.component.html',
   styleUrls: ['./birthday-landing-page.component.scss'],
   standalone: true,
+  imports: [CommonModule, FormsModule],
   encapsulation: ViewEncapsulation.None
 })
-export class BirthdayLandingPageComponent implements OnInit, AfterViewInit {
+export class BirthdayLandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   showFab = false;
-  private observer!: IntersectionObserver;
+  showModal = false;
+  passwordValue = '';
+  passwordPlaceholder = 'Ingresa la contraseña secreta...';
+  passwordError = false;
+  passwordSuccess = false;
 
-  constructor(private elementRef: ElementRef) {}
+  private observer!: IntersectionObserver;
+  private readonly correctPassword = '12042022';
+
+  private photoService: PhotoService;
+  photos: PhotoInterface[] = [];
+
+  @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
+
+  constructor(private elementRef: ElementRef, photoService: PhotoService) {
+    this.photoService = photoService;
+  }
 
   ngOnInit(): void {
-    // Setup intersection observer for fade-in animations
     this.setupIntersectionObserver();
+    this.loadPhotos();
   }
 
   ngAfterViewInit(): void {
-    // Observe all fade-in elements
     const fadeElements = this.elementRef.nativeElement.querySelectorAll('.fade-in');
     fadeElements.forEach((element: Element) => {
       this.observer.observe(element);
     });
 
-    // Setup scroll listener for FAB
     this.setupScrollListener();
+  }
+
+  ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 
   private setupIntersectionObserver(): void {
@@ -66,13 +89,91 @@ export class BirthdayLandingPageComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onPhotoClick(): void {
-    alert('Click here to add your photo! You can replace this with actual photo upload functionality.');
+  private loadPhotos(): void {
+    this.photoService.getPhotosFromAssets().subscribe({
+      next: photos => {
+        console.log(photos);
+        this.photos = photos;
+      },
+      error: error => {
+        console.log("Error loading photos...", error);
+      }
+    });
   }
 
-  ngOnDestroy(): void {
-    if (this.observer) {
-      this.observer.disconnect();
+  checkPassword(): void {
+    const password = this.passwordValue.trim().toLowerCase();
+
+    if (password === this.correctPassword) {
+      this.passwordSuccess = true;
+      this.passwordError = false;
+
+      this.passwordPlaceholder = '¡Contraseña correcta! ❤️';
+
+      setTimeout(() => {
+        this.showModal = true;
+        document.body.style.overflow = 'hidden';
+      }, 800);
+
+      setTimeout(() => {
+        this.resetPasswordInput();
+      }, 1000);
+
+    } else {
+      this.passwordError = true;
+      this.passwordSuccess = false;
+
+      this.passwordPlaceholder = '❌ Contraseña incorrecta, intenta de nuevo';
+      this.shakePasswordInput();
+
+      setTimeout(() => {
+        this.resetPasswordInput();
+        if (this.passwordInput) {
+          this.passwordInput.nativeElement.focus();
+        }
+      }, 2000);
     }
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  onPasswordKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.checkPassword();
+    }
+  }
+
+  onModalOverlayClick(event: MouseEvent): void {
+    if (event.target === event.currentTarget) {
+      this.closeModal();
+    }
+  }
+
+  private resetPasswordInput(): void {
+    this.passwordValue = '';
+    this.passwordPlaceholder = 'Ingresa la contraseña secreta...';
+    this.passwordError = false;
+    this.passwordSuccess = false;
+  }
+
+  private shakePasswordInput(): void {
+    if (this.passwordInput) {
+      const inputElement = this.passwordInput.nativeElement;
+      inputElement.style.animation = 'shake 0.5s ease-in-out';
+
+      setTimeout(() => {
+        inputElement.style.animation = '';
+      }, 500);
+    }
+  }
+
+  get passwordInputClasses(): string {
+    let classes = 'password-input';
+    if (this.passwordError) classes += ' error';
+    if (this.passwordSuccess) classes += ' success';
+    return classes;
   }
 }
