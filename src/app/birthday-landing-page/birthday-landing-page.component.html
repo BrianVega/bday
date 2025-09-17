@@ -9,11 +9,11 @@
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="hero-content">
-    <h1 class="hero-title">Lorem Ipsum Dolor</h1>
-    <p class="hero-subtitle">Consectetur adipiscing elit, sed do eiusmod tempor</p>
-    <p class="birthday-date">September 15, 2025</p>
+    <h1 class="hero-title">Feliz Cumpleaños mi amor!</h1>
+    <p class="hero-subtitle">Hoy celebramos a la novia más bonita, bella, hermosa, preciosa del mundo mundial</p>
+    <p class="birthday-date">17 de septiembre del 2025</p>
     <button class="btn" (click)="scrollToSection('memories')">
-      <i class="fas fa-gift"></i> Cras Vitae
+      <i class="fas fa-gift"></i> Por qué me encantas tanto?
     </button>
   </div>
 </section>
@@ -21,32 +21,16 @@
 <!-- Photo Gallery Section -->
 <section class="section">
   <div class="container">
-    <h2 class="section-title fade-in">Nostra Memoriae</h2>
+    <h2 class="section-title fade-in">Nuestros Bellos Recuerdos</h2>
     <div class="photo-gallery">
-      <div class="photo-card fade-in" (click)="onPhotoClick()">
-        <div class="photo-placeholder">
-          <i class="fas fa-camera"></i>
+      @for (photo of photos; track photo) {
+        <div class="photo-card fade-in">
+          <div class="photo-placeholder">
+            <img [src]="photo.url" class="photo fade-in" [alt]="'Photo ' + ($index + 1)">
+          </div>
+          <div class="photo-caption">{{ photo.caption }}</div>
         </div>
-        <div class="photo-caption">Duis aute irure dolor</div>
-      </div>
-      <div class="photo-card fade-in" (click)="onPhotoClick()">
-        <div class="photo-placeholder">
-          <i class="fas fa-heart"></i>
-        </div>
-        <div class="photo-caption">In voluptate velit</div>
-      </div>
-      <div class="photo-card fade-in" (click)="onPhotoClick()">
-        <div class="photo-placeholder">
-          <i class="fas fa-star"></i>
-        </div>
-        <div class="photo-caption">Esse cillum dolore</div>
-      </div>
-      <div class="photo-card fade-in" (click)="onPhotoClick()">
-        <div class="photo-placeholder">
-          <i class="fas fa-kiss"></i>
-        </div>
-        <div class="photo-caption">Fugiat nulla pariatur</div>
-      </div>
+      }
     </div>
   </div>
 </section>
@@ -56,8 +40,11 @@
   <div class="container">
     <div class="love-message fade-in">
       <p class="love-text">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        "Desde hace más de tres años que todos los días junto a ti son especiales, así que al de hoy lo vamos a
+        clasificar como extra-especial. Hoy hace 24 años el mundo recibió su segundo sol gracias a tu sonrisa. La luz de
+        la luna envidió el brillar de tus ojos, y simplemente llegaste a hacer de este mundo un lugar mejor."
       </p>
+      <p class="love-text bold">Feliz cumpleaños bombona</p>
     </div>
   </div>
 </section>
@@ -65,47 +52,157 @@
 <!-- Memories Section -->
 <section class="section" id="memories">
   <div class="container">
-    <h2 class="section-title fade-in">Quam Nunc</h2>
+    <h2 class="section-title fade-in">Cosas que me encantan de Ti</h2>
     <div class="memory-grid">
       <div class="memory-card fade-in">
         <div class="memory-title">
           <i class="fas fa-smile text-yellow-400"></i>
-          Lorem Ipsum
+          Tu bella sonrisa
         </div>
         <p class="memory-text">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+          Quien diría que una sonrisa sin colmillos podría ponerme tan contento. Me encanta verte feliz, verte sonreir y
+          hacer caras, ver como a veces te chiqueas y siento eres tu misma.
         </p>
       </div>
+
       <div class="memory-card fade-in">
         <div class="memory-title">
           <i class="fas fa-brain text-purple-400"></i>
-          Dolor Sit Amet
+          Tu forma de ser
         </div>
         <p class="memory-text">
-          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
+          La forma en la que tratas a los perritos, a la gente, como eres en tu trabajo, en los deportes que haces y en
+          general como ves al mundo me fascina. Esas orejitas que les falta un pedacito esconden un cerebro maravilloso.
         </p>
       </div>
+
       <div class="memory-card fade-in">
         <div class="memory-title">
           <i class="fas fa-heart text-red-400"></i>
-          Consectetur
+          Tus cautivantes ojos
         </div>
         <p class="memory-text">
-          Adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.
+          Podría estar todo el día viendo como el brillar de tus ojos cambia con respecto a las horas que transcurren.
+          Me encanta el color de tus ojos y lo que transmite cada mirada de ellos.
         </p>
       </div>
-      <div class="memory-card fade-in">
+
+      <div class="memory-card fade-in password-card">
         <div class="memory-title">
-          <i class="fas fa-star text-yellow-300"></i>
-          Adipiscing Elit
+          <i class="fas fa-lock text-orange-400"></i>
+          Quieres ver más? Ingresa la contraseña
         </div>
-        <p class="memory-text">
-          Nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-        </p>
+        <div class="memory-text">
+          <div class="password-input-container">
+            <input
+              #passwordInput
+              type="password"
+              [class]="passwordInputClasses"
+              [placeholder]="passwordPlaceholder"
+              [(ngModel)]="passwordValue"
+              (keypress)="onPasswordKeyPress($event)"
+              maxlength="20">
+            <button class="unlock-btn" (click)="checkPassword()">
+              <i class="fas fa-heart"></i>
+              Desbloquear
+            </button>
+          </div>
+          <div class="password-hint">
+            💡 Pista: La fecha del inicio de nuestra historia (DDMMYYYY)
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+
+<!--Modal section-->
+@if (showModal) {
+  <div class="modal-overlay"
+       [class.show]="showModal"
+       (click)="onModalOverlayClick($event)">
+    <div class="modal-content">
+      <button class="modal-close" (click)="closeModal()">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div class="letter-container">
+        <div class="letter-header">
+          <h2 class="letter-title">Carta de amor para la cumpleañera más hermosa💕</h2>
+          <div class="letter-date">De parte del nenuco, el novio más afortunado</div>
+        </div>
+
+        <div class="letter-body">
+          <p class="letter-paragraph">Hola mi amore, espero que te guste mucho este regalo, a pesar de que quedámos en ir a la playa para celebrar, quería hacerte algo extra, sé que quizá no es la mejor página que existe, pero si la que tiene más amor.
+            Te quise hacer algo distinto para este cumpleaños, una manualidad (así si me gustan las manualidades) diferente que quede en un lugar como este, muuuy muuuuuy probablemente, se encuentren errorcitos por ahí jeje, pero eso es lo de menos bebé.
+          </p>
+          <p class="letter-paragraph">
+            A lo largo del sitio hay algunos mensajitos que reflejan el aprecio, amor y afecto que siento por ti. Sin embargo la idea de esta
+            pequeña carta es reunir algunas palabras que llegan a mi mente cuando pienso en tí y poder plasmarlas.
+          </p>
+          <p class="letter-paragraph">
+            Realmente te has convertido en una parte de mí, un complemento a mi ser, alguien con quien me encanta estar, pasar tiempo juntos
+            y simplemente existir, no tiene que haber una actividad, el único requisito es tu compañía.
+          </p>
+          <p class="letter-paragraph">
+            Recuerdo todas las vivencias por las que hemos pasado, momentos buenos y malos, desde cuando me pegaste el covid, las veces que hemos ido a GDL,
+            cuando hemos visto películas en el carro (que por cierto quedó mocha una), las idas al cerro, cuando hemos jugado gallitos, idas forzadas al jardín jejeje,
+            y todo suma a nuestra historia en gran manera, recuerdo todo lo bonito y me dan ganas de repetirlo hasta el infinito mientras sea contigo corazón de melón melón melón.
+          </p>
+          <p class="letter-paragraph">
+            Eres una gran mujer, novia, persona, compañera, ingeniera, amiga, hija, y todo lo bueno que existe lo tienes tú, estoy ansioso de poder la experiencia del viaje
+            contigo y ser muy felices en la playa.
+          </p>
+          <p class="letter-paragraph">
+            Se que puedo flaquear en algunos aspectos, sin embargo tú me inspiras a mejorar cada día, prueba de ello es esta paginita, love u 💕.
+          </p>
+          <p class="letter-paragraph">
+            Creo que nadie en el CBTis apostaría a que estaríamos en esta posición unos años después, pero Dios sabe porque cruzó nuestros caminos y nos hizo uno mismo,
+            eres maravillosa y todo de ti me fascina, me encanta que existas conmigo y estoy muy contento por ello, espero que podamos seguir creciendo juntos, viviendo mucho,
+            superando todo y siendo muy felices.
+          </p>
+          <p class="letter-paragraph">
+            Te deseo muy feliz cumpleaños bebé, apuntame todos los besos, abrazos y todo lo que quieras a la cuenta para pagartelos con interéses cuando te vea,
+            por lo pronto te mando todo a la distancia y espero que te la pases súper bien en tu día y tu semana de cumpleaños, que no chambees, te diviertas y comas lo que quieras.
+          </p>
+          <p class="letter-paragraph">
+            Ahora si ya me topaste pero sigues estando tiquita.
+          </p>
+          <p class="letter-paragraph bold">
+            Te amo mucho mi amor, de aquí hasta el infinito, más allá y más uno.
+          </p>
+
+
+
+
+
+          <div class="letter-signature">
+            <p class="signature-text">
+              Feliz cumpleaños, mi amor.<br>
+              Que este nuevo año de vida esté lleno de sueños cumplidos, sonrisas infinitas, y todo lo que te mereces.
+            </p>
+
+            <div class="signature">
+              <p>Con amor infinito,</p>
+              <p class="signature-name">Tu novio que te ama más cada día ❤️</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="letter-footer">
+          <div class="floating-hearts">
+            <span class="heart">💖</span>
+            <span class="heart">💕</span>
+            <span class="heart">💗</span>
+            <span class="heart">💝</span>
+            <span class="heart">💘</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
 
 <!-- Floating Action Button -->
 <button class="fab"
